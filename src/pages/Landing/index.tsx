@@ -20,7 +20,7 @@ const Landing: React.FC = () => {
           <span>São Paulo</span>
         </Location>
 
-        <EnterButton to="/app">
+        <EnterButton to="/app" data-testid="map">
           <FiArrowRight size={26} color="rgba(0, 0, 0, 0.6)" />
         </EnterButton>
       </Content>
