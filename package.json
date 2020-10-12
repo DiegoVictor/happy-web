@@ -3,13 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^24.0.0",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
     "leaflet": "^1.7.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -21,10 +14,24 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src/",
+      "<rootDir>/tests/"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/pages"
+    ],
+    "coverageDirectory": "tests/coverage",
+    "testMatch": [
+      "**/tests/**/*.spec.tsx"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,6 +49,13 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^11.0.4",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
     "@types/react-leaflet": "^2.5.2",
     "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.4",
@@ -54,6 +68,8 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-react-hooks": "^4.1.2",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "react-app-rewired": "^2.1.6",
+    "ts-jest": "^26.4.1"
   }
 }
