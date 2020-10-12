@@ -1,6 +1,6 @@
 {
   "name": "happy",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -40,6 +40,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.1.6",
+    "@types/styled-components": "^5.1.4",
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
     "eslint-config-airbnb": "^18.2.0",
