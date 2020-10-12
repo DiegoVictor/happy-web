@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import LandingImg from '../../images/landing.svg';
@@ -55,7 +56,7 @@ export const Location = styled.div`
   }
 `;
 
-export const EnterButton = styled.a`
+export const EnterButton = styled(Link)`
   align-items: center;
   background-color: #ffd666;
   border-radius: 30px;
