@@ -29,7 +29,7 @@ const OrphanagesMap: React.FC = () => {
         </Map>
       </MapContainer>
 
-      <AddOrphanage to="/">
+      <AddOrphanage to="/register" data-testid="register">
         <FiPlus size={32} color="#FFF" />
       </AddOrphanage>
     </Container>
