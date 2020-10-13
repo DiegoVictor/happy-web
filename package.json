@@ -28,7 +28,7 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "src/pages/**/*.tsx",
-      "!src/styles/*.tsx",
+      "!src/styles/*.ts",
       "!src/routes/*.tsx",
       "!src/*.tsx"
     ],
