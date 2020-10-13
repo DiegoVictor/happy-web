@@ -17,6 +17,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
+    "test:coverage": "react-app-rewired test --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "jest": {
@@ -26,7 +27,10 @@
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/pages"
+      "src/pages/**/*.tsx",
+      "!src/styles/*.tsx",
+      "!src/routes/*.tsx",
+      "!src/*.tsx"
     ],
     "coverageDirectory": "tests/coverage",
     "testMatch": [
