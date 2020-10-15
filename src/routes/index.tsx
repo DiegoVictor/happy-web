@@ -11,8 +11,8 @@ export default () => {
     <Switch>
       <Route component={Landing} path="/" exact />
       <Route component={OrphanagesMap} path="/app" />
-      <Route component={Orphanage} path="/orphanages/:id" />
       <Route component={CreateOrphanage} path="/orphanages/create" />
+      <Route component={Orphanage} path="/orphanages/:id" />
     </Switch>
   );
 };
