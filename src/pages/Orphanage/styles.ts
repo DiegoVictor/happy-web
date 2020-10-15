@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+interface ImageButtonProps {
+  active: boolean;
+}
 
 export const Container = styled.div`
   display: flex;
@@ -29,26 +33,22 @@ export const Images = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   margin: 16px 40px 0;
+`;
 
-  button {
-    background: none;
-    border: 0;
-    border-radius: 20px;
-    cursor: pointer;
+export const ImageButton = styled.button<ImageButtonProps>`
+  background: none;
+  border: 0;
+  border-radius: 20px;
+  cursor: pointer;
+  height: 88px;
+  opacity: ${props => (props.active ? 1 : 0.6)};
+  overflow: hidden;
+  outline: none;
+
+  img {
+    object-fit: cover;
     height: 88px;
-    opacity: 0.6;
-    overflow: hidden;
-    outline: none;
-
-    &.active {
-      opacity: 1;
-    }
-
-    img {
-      object-fit: cover;
-      height: 88px;
-      width: 100%;
-    }
+    width: 100%;
   }
 `;
 
@@ -81,31 +81,29 @@ export const Content = styled.div`
     font-size: 36px;
     line-height: 46px;
   }
+`;
 
-  button {
-    &.contact-button {
-      align-items: center;
-      background: #3cdc8c;
-      border: 0;
-      border-radius: 20px;
-      color: #ffffff;
-      cursor: pointer;
-      display: flex;
-      font-weight: 800;
-      height: 64px;
-      justify-content: center;
-      margin-top: 64px;
-      transition: background-color 0.2s;
-      width: 100%;
+export const ContactButton = styled.button`
+  align-items: center;
+  background: #3cdc8c;
+  border: 0;
+  border-radius: 20px;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  font-weight: 800;
+  height: 64px;
+  justify-content: center;
+  margin-top: 64px;
+  transition: background-color 0.2s;
+  width: 100%;
 
-      &:hover {
-        background: #36cf82;
-      }
+  &:hover {
+    background: #36cf82;
+  }
 
-      svg {
-        margin-right: 16px;
-      }
-    }
+  svg {
+    margin-right: 16px;
   }
 `;
 
@@ -120,23 +118,36 @@ export const OpenDetails = styled.div`
     line-height: 28px;
     padding: 32px 24px;
 
-    &.hour {
-      background: linear-gradient(149.97deg, #e6f7fb 8.13%, #ffffff 92.67%);
-      border: 1px solid #b3dae2;
-      color: #5c8599;
-    }
-
-    &.open-on-weekends {
-      background: linear-gradient(154.16deg, #edfff6 7.85%, #ffffff 91.03%);
-      border: 1px solid #a1e9c5;
-      color: #37c77f;
-    }
-
     svg {
       display: block;
       margin-bottom: 20px;
     }
   }
+`;
+
+export const Hour = styled.div`
+  background: linear-gradient(149.97deg, #e6f7fb 8.13%, #ffffff 92.67%);
+  border: 1px solid #b3dae2;
+  color: #5c8599;
+`;
+
+interface WeekendsProps {
+  closed?: boolean;
+}
+
+export const Weekends = styled.div<WeekendsProps>`
+  ${props =>
+    props.closed
+      ? css`
+          background: linear-gradient(154.16deg, #fdf0f5 7.85%, #ffffff 91.03%);
+          border: 1px solid #ffbcd4;
+          color: #ff6690;
+        `
+      : css`
+          background: linear-gradient(154.16deg, #edfff6 7.85%, #ffffff 91.03%);
+          border: 1px solid #a1e9c5;
+          color: #37c77f;
+        `}
 `;
 
 export const MapContainer = styled.div`
