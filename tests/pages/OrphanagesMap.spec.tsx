@@ -19,7 +19,7 @@ describe('OrphanagesMap page', () => {
 
     fireEvent.click(button);
 
-    expect(history.location.pathname).toBe('/register');
+    expect(history.location.pathname).toBe('/orphanages/create');
   });
 
   it('should be able to navigate to map page', () => {
