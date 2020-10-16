@@ -22,6 +22,8 @@ This web version allow users to look for orphanages near from yourself.
 Click to expand.<br>
 <img src="https://raw.githubusercontent.com/DiegoVictor/happy-web/master/screenshots/landing.png" width="49%"/>
 <img src="https://raw.githubusercontent.com/DiegoVictor/happy-web/master/screenshots/map.png" width="49%"/>
+<img src="https://raw.githubusercontent.com/DiegoVictor/happy-web/master/screenshots/form.png" width="49%"/>
+<img src="https://raw.githubusercontent.com/DiegoVictor/happy-web/master/screenshots/orphanage.png" width="49%"/>
 
 # Installing
 Easy peasy lemon squeezy:
