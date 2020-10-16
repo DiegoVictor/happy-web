@@ -5,6 +5,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      REACT_APP_API_URL: 'http://localhost:3333/v1'
     steps:
       - uses: actions/setup-node@v1
         with:
