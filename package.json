@@ -30,9 +30,11 @@
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/pages/**/*.tsx",
-      "!src/styles/*.ts",
+      "!src/images/*.svg",
       "!src/routes/*.tsx",
+      "!src/services/*.ts",
+      "!src/styles/*.ts",
+      "!src/utils/*.ts",
       "!src/*.tsx"
     ],
     "coverageDirectory": "tests/coverage",
