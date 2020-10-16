@@ -14,6 +14,9 @@ This web version allow users to look for orphanages near from yourself.
 ## Table of Contents
 * [Screenshots](#screenshots)
 * [Installing](#installing)
+  * [Configuring](#configuring)
+      * [.env](#env)
+      * [API](#api)
 * [Usage](#usage)
 * [Running the tests](#running-the-tests)
   * [Coverage Report](#coverage-report)
@@ -35,6 +38,19 @@ Or:
 $ npm install
 ```
 > Was installed and configured the [`eslint`](https://eslint.org/) and [`prettier`](https://prettier.io/) to keep the code clean and patterned.
+
+## Configuring
+Configure your environment variables and remember to start the [API](https://github.com/DiegoVictor/happy-api) before to start this app.
+
+### .env
+In this file you may configure the API's url. Rename the `.env.example` in the root directory to `.env` then just update with your settings.
+
+key|description|default
+---|---|---
+REACT_APP_API_URL|API's url with version (v1)|`http://localhost:3333/v1`
+
+### API
+Start the [API](https://github.com/DiegoVictor/happy-api) (see its README for more information). In case of any change in the API's `port` or `host` remember to update the [`.env`](#env) too.
 
 # Usage
 To start the app run:
