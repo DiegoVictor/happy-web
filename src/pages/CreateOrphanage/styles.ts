@@ -1,5 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Form as UnForm } from '@unform/web';
+
+interface ButtonProps {
+  active?: boolean;
+}
 
 export const Container = styled.div`
   display: flex;
@@ -17,6 +21,12 @@ export const Form = styled(UnForm)`
   margin: 64px auto;
   padding: 64px 80px;
   width: 700px;
+
+  .leaflet-container {
+    border: 1px solid #d3e2e5;
+    border-radius: 20px;
+    margin-bottom: 40px;
+  }
 
   fieldset {
     border: 0;
@@ -39,7 +49,7 @@ export const Form = styled(UnForm)`
 `;
 
 export const InputBlock = styled.div`
-  & + InputBlock {
+  & + div {
     margin-top: 24px;
   }
 
@@ -81,40 +91,62 @@ export const InputBlock = styled.div`
   }
 `;
 
-export const NewImage = styled.button`
+export const UploadedImages = styled.div`
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(5, 1fr);
+
+  input[type='file'] {
+    visibility: hidden;
+  }
+
+  img {
+    border-radius: 20px;
+    height: 96px;
+    object-fit: cover;
+    width: 100%;
+  }
+`;
+
+export const NewImage = styled.label`
+  align-items: center;
   background: #f5f8fa;
   border: 1px dashed #96d2f0;
   border-radius: 20px;
   cursor: pointer;
-  height: 64px;
+  display: flex;
+  height: 96px;
+  justify-content: center;
   width: 100%;
 `;
 
-export const ButtonSelect = styled.button`
+export const ButtonSelect = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+`;
 
-  button {
-    background: #f5f8fa;
-    border: 1px solid #d3e2e5;
-    color: #5c8599;
-    cursor: pointer;
-    height: 64px;
+export const Button = styled.button<ButtonProps>`
+  background: #f5f8fa;
+  border: 1px solid #d3e2e5;
+  color: #5c8599;
+  cursor: pointer;
+  height: 64px;
 
-    &.active {
+  ${props =>
+    props.active &&
+    css`
       background: #edfff6;
       border: 1px solid #a1e9c5;
       color: #37c77f;
-    }
+    `}
 
-    &:first-child {
-      border-radius: 20px 0px 0px 20px;
-    }
+  &:first-child {
+    border-radius: 20px 0px 0px 20px;
+  }
 
-    &:last-child {
-      border-left: 0;
-      border-radius: 0 20px 20px 0;
-    }
+  &:last-child {
+    border-left: 0;
+    border-radius: 0 20px 20px 0;
   }
 `;
 
