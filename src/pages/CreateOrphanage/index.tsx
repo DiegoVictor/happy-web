@@ -68,7 +68,7 @@ const CreateOrphanage: React.FC = () => {
           form.append('images', image);
         });
 
-        await api.post('orphanages', form);
+        await api.post('/orphanages', form);
 
         history.push('/app');
       } catch (err) {
