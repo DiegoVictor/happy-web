@@ -150,6 +150,11 @@ const CreateOrphanage: React.FC = () => {
             </InputBlock>
 
             <InputBlock>
+              <label htmlFor="whatsapp">WhatsApp</label>
+              <Input id="whatsapp" name="whatsapp" />
+            </InputBlock>
+
+            <InputBlock>
               <label htmlFor="open_on_weekends">Atende fim de semana</label>
 
               <ButtonSelect>

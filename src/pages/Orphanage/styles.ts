@@ -83,7 +83,7 @@ export const Content = styled.div`
   }
 `;
 
-export const ContactButton = styled.button`
+export const ContactButton = styled.a`
   align-items: center;
   background: #3cdc8c;
   border: 0;
@@ -96,6 +96,7 @@ export const ContactButton = styled.button`
   justify-content: center;
   margin-top: 64px;
   transition: background-color 0.2s;
+  text-decoration: none;
   width: 100%;
 
   &:hover {
