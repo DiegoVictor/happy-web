@@ -29,6 +29,9 @@
       "<rootDir>/src/",
       "<rootDir>/tests/"
     ],
+    "setupFilesAfterEnv": [
+      "./jest.setup.ts"
+    ],
     "collectCoverage": true,
     "collectCoverageFrom": [
       "!src/images/*.svg",
