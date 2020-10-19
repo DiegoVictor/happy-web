@@ -2,15 +2,13 @@ import React, { useEffect, useRef } from 'react';
 
 import { useField } from '@unform/core';
 
-export default function Input({
-  name,
-  ...rest
-}: {
+interface InputProps {
   name: string;
   [key: string]: any;
-}) {
-  const inputRef = useRef(null);
+}
 
+const Input: React.FC<InputProps> = ({ name, ...rest }) => {
+  const inputRef = useRef(null);
   const { fieldName, defaultValue, registerField, error } = useField(name);
 
   useEffect(() => {
@@ -27,4 +25,6 @@ export default function Input({
       <span>{error}</span>
     </div>
   );
-}
+};
+
+export default Input;

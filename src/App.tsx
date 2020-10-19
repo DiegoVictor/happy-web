@@ -5,13 +5,14 @@ import 'leaflet/dist/leaflet.css';
 import Routes from './routes';
 import Theme from './styles/theme';
 
-function App() {
+const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Theme />
       <Routes />
     </BrowserRouter>
   );
-}
+};
 
 export default App;
