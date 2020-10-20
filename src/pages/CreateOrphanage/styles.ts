@@ -26,6 +26,14 @@ export const Form = styled(UnForm)`
     border: 1px solid #d3e2e5;
     border-radius: 20px;
     margin-bottom: 40px;
+
+    & + span {
+      color: #ff6690;
+      display: block;
+      margin-bottom: 40px;
+      margin-top: -40px;
+      padding: 5px;
+    }
   }
 
   fieldset {
@@ -75,6 +83,12 @@ export const InputBlock = styled.div`
     color: #5c8599;
     outline: none;
     width: 100%;
+
+    & + span {
+      color: #ff6690;
+      display: block;
+      padding: 5px;
+    }
   }
 
   input {

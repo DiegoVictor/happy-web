@@ -1,12 +1,18 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import { FiPlus } from 'react-icons/fi';
 import { LeafletMouseEvent } from 'leaflet';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import * as Yup from 'yup';
+import { FormHandles } from '@unform/core';
 
 import Sidebar from '../../components/Sidebar';
 import Input from '../../components/Input';
 import Textarea from '../../components/Textarea';
 import mapIcon from '../../utils/mapIcon';
+import api from '../../services/api';
+import getValidationErrors from '../../utils/getValidationErrors';
 import {
   Container,
   Form,
@@ -17,15 +23,15 @@ import {
   Button,
   UploadedImages,
 } from './styles';
-import api from '../../services/api';
-import { useHistory } from 'react-router-dom';
 
 const CreateOrphanage: React.FC = () => {
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const [openOnWeekends, setOpenOnWeekends] = useState(false);
   const [images, setImages] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
+  const [mapError, setMapError] = useState('');
 
+  const formRef = useRef<FormHandles>(null);
   const history = useHistory();
 
   const handleMapClick = useCallback((event: LeafletMouseEvent) => {
@@ -68,11 +74,51 @@ const CreateOrphanage: React.FC = () => {
           form.append('images', image);
         });
 
+        const requiredText = 'Este campo é obrigatório';
+
+        formRef.current?.setErrors({});
+        const schema = Yup.object().shape({
+          name: Yup.string()
+            .min(3, 'Este campo deve conter no minimo 3 caracteres')
+            .required(requiredText),
+          latitude: Yup.number().notOneOf([0], 'Marque um ponto no mapa'),
+          longitude: Yup.number().notOneOf([0], 'Marque um ponto no mapa'),
+          about: Yup.string()
+            .min(10, 'Este campo deve conter no minimo 10 caracteres')
+            .required(requiredText),
+          instructions: Yup.string().min(10).required(requiredText),
+          opening_hours: Yup.string()
+            .min(10, 'Este campo deve conter no minimo 10 caracteres')
+            .required(requiredText),
+          whatsapp: Yup.string()
+            .min(8, 'Este campo deve conter no minimo 8 caracteres')
+            .required(requiredText),
+        });
+
+        await schema.validate(
+          {
+            ...formRef.current?.getData(),
+            open_on_weekends: openOnWeekends,
+            ...position,
+          },
+          { abortEarly: false },
+        );
+
         await api.post('/orphanages', form);
 
         history.push('/app');
       } catch (err) {
-        console.log(err);
+        if (err instanceof Yup.ValidationError) {
+          const errBag = getValidationErrors(err);
+
+          if (errBag.latitude && errBag.longitude) {
+            setMapError(errBag.latitude);
+          }
+
+          formRef.current?.setErrors(errBag);
+        } else {
+          toast.error('Ops! Alguma coisa deu errada tente novamente');
+        }
       }
     },
     [openOnWeekends, history, images, position],
@@ -83,7 +129,7 @@ const CreateOrphanage: React.FC = () => {
       <Sidebar />
 
       <main>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} ref={formRef}>
           <fieldset>
             <legend>Dados</legend>
 
@@ -92,6 +138,7 @@ const CreateOrphanage: React.FC = () => {
               style={{ width: '100%', height: 280 }}
               zoom={15}
               onClick={handleMapClick}
+              data-testid="map"
             >
               <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
@@ -103,6 +150,7 @@ const CreateOrphanage: React.FC = () => {
                 />
               )}
             </Map>
+            {mapError && <span>{mapError}</span>}
 
             <InputBlock>
               <label htmlFor="name">Nome</label>
@@ -113,15 +161,25 @@ const CreateOrphanage: React.FC = () => {
               <label htmlFor="about">
                 Sobre <span>Máximo de 300 caracteres</span>
               </label>
-              <Textarea id="about" name="about" maxLength={300} />
+              <Textarea
+                id="about"
+                name="about"
+                maxLength={300}
+                data-testid="about"
+              />
             </InputBlock>
 
             <InputBlock>
               <label htmlFor="images">Fotos</label>
 
               <UploadedImages>
-                {previews.map(image => (
-                  <img src={image} key={image} alt="Preview" />
+                {previews.map((image, index) => (
+                  <img
+                    src={image}
+                    key={image}
+                    alt="Preview"
+                    data-testid={`preview_${index}`}
+                  />
                 ))}
                 <NewImage htmlFor="image[]">
                   <FiPlus size={24} color="#15b6d6" />
@@ -130,6 +188,7 @@ const CreateOrphanage: React.FC = () => {
                   type="file"
                   id="image[]"
                   multiple
+                  data-testid="add_image"
                   onChange={handleSelectedImage}
                 />
               </UploadedImages>
@@ -162,6 +221,7 @@ const CreateOrphanage: React.FC = () => {
                   type="button"
                   active={openOnWeekends}
                   onClick={() => setOpenOnWeekends(true)}
+                  data-testid="open_on_weekends"
                 >
                   Sim
                 </Button>
@@ -169,6 +229,7 @@ const CreateOrphanage: React.FC = () => {
                   type="button"
                   active={!openOnWeekends}
                   onClick={() => setOpenOnWeekends(false)}
+                  data-testid="not_open_on_weekends"
                 >
                   Não
                 </Button>
@@ -176,7 +237,9 @@ const CreateOrphanage: React.FC = () => {
             </InputBlock>
           </fieldset>
 
-          <ConfirmButton type="submit">Confirmar</ConfirmButton>
+          <ConfirmButton type="submit" data-testid="submit">
+            Confirmar
+          </ConfirmButton>
         </Form>
       </main>
     </Container>
