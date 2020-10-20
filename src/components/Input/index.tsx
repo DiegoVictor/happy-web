@@ -21,7 +21,7 @@ const Input: React.FC<InputProps> = ({ name, ...rest }) => {
   return (
     <div>
       <input ref={inputRef} defaultValue={defaultValue} {...rest} />
-      <span>{error}</span>
+      {error && <span>{error}</span>}
     </div>
   );
 };
