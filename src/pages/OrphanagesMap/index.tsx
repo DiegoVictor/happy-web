@@ -20,6 +20,7 @@ const OrphanagesMap: React.FC = () => {
   useEffect(() => {
     (async () => {
       const { data } = await api.get<Orphanage[]>('/orphanages');
+
       setOrphanages(data);
     })();
   }, []);
@@ -51,7 +52,10 @@ const OrphanagesMap: React.FC = () => {
             >
               <Popup closeButton={false} maxWidth={240} minWidth={240}>
                 {orphanage.name}
-                <Link to={`/orphanages/${orphanage.id}`}>
+                <Link
+                  to={`/orphanages/${orphanage.id}`}
+                  data-testid={`orphanages_${orphanage.id}`}
+                >
                   <FiArrowRight size={20} color="#FFF" />
                 </Link>
               </Popup>
