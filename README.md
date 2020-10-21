@@ -9,7 +9,7 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](https://github.com/DiegoVictor/happy-web/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)<br>
 
-This web version allow users to look for orphanages near from yourself.
+This web version allow users to look for orphanages near from yourself, see details about it and create new ones.
 
 ## Table of Contents
 * [Screenshots](#screenshots)
