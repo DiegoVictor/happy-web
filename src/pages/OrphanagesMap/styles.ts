@@ -1,4 +1,3 @@
-import { Popup as LeafletPopup } from 'react-leaflet';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -48,28 +47,7 @@ export const MapContainer = styled.div`
   > div {
     height: 100%;
   }
-`;
 
-export const AddOrphanage = styled(Link)`
-  align-items: center;
-  background-color: #15c3d6;
-  border-radius: 20px;
-  bottom: 40px;
-  display: flex;
-  height: 64px;
-  justify-content: center;
-  position: absolute;
-  right: 40px;
-  transition: background-color 0.2s;
-  width: 64px;
-  z-index: 2;
-
-  &:hover {
-    background-color: #17d6eb;
-  }
-`;
-
-export const Popup = styled(LeafletPopup)`
   .leaflet-popup-content-wrapper {
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 20px;
@@ -99,5 +77,24 @@ export const Popup = styled(LeafletPopup)`
 
   .leaflet-popup-tip-container {
     display: none;
+  }
+`;
+
+export const AddOrphanage = styled(Link)`
+  align-items: center;
+  background-color: #15c3d6;
+  border-radius: 20px;
+  bottom: 40px;
+  display: flex;
+  height: 64px;
+  justify-content: center;
+  position: absolute;
+  right: 40px;
+  transition: background-color 0.2s;
+  width: 64px;
+  z-index: 2;
+
+  &:hover {
+    background-color: #17d6eb;
   }
 `;
