@@ -62,6 +62,7 @@ const Orphanage: React.FC = () => {
             <img
               src={orphanage.images[activeImageIndex].path}
               alt={orphanage.name}
+              data-testid={`principal_image`}
             />
 
             <Images>
@@ -70,11 +71,16 @@ const Orphanage: React.FC = () => {
                   key={image.id}
                   active={index === activeImageIndex}
                   type="button"
+                  data-testid={`images_button_${image.id}`}
                   onClick={() => {
                     setActiveImageIndex(index);
                   }}
                 >
-                  <img src={image.path} alt={orphanage.name} />
+                  <img
+                    src={image.path}
+                    alt={orphanage.name}
+                    data-testid={`images_${image.id}`}
+                  />
                 </ImageButton>
               ))}
             </Images>
@@ -119,7 +125,7 @@ const Orphanage: React.FC = () => {
               <p>{orphanage.instructions}</p>
 
               <OpenDetails>
-                <Hour>
+                <Hour data-testid="opening_hours">
                   <FiClock size={32} color="#15B6D6" />
                   Segunda à Sexta <br />
                   {orphanage.opening_hours}
@@ -143,6 +149,7 @@ const Orphanage: React.FC = () => {
                 target="_blank"
                 href={`https://api.whatsapp.com/send?phone=${orphanage.whatsapp}&text=Ol%C3%A1,%20gostaria%20de%20visitar%20a%20institui%C3%A7%C3%A3o!`}
                 type="button"
+                data-testid="whatsapp"
               >
                 <FaWhatsapp size={20} color="#FFF" />
                 Entrar em contato
