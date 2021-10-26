@@ -7,7 +7,7 @@
 [![airbnb-style](https://flat.badgen.net/badge/style-guide/airbnb/ff5a5f?icon=airbnb)](https://github.com/airbnb/javascript)
 [![jest](https://img.shields.io/badge/jest-24.9.0-brightgreen?style=flat-square&logo=jest)](https://jestjs.io/)
 [![coverage](https://img.shields.io/codecov/c/gh/DiegoVictor/happy-web?logo=codecov&style=flat-square)](https://codecov.io/gh/DiegoVictor/happy-web)
-[![MIT License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](https://github.com/DiegoVictor/happy-web/blob/master/LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](https://raw.githubusercontent.com/DiegoVictor/happy-web/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)<br>
 
 This web version allow users to look for orphanages near from yourself, see details about it and create new ones.
