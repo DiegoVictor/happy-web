@@ -9,8 +9,6 @@ jobs:
       REACT_APP_API_URL: 'http://localhost:3333/v1'
     steps:
       - uses: actions/setup-node@v1
-        with:
-          node-version: '12.18.3'
       - uses: actions/checkout@v2
       - name: Run tests
         run: |
