@@ -9,7 +9,7 @@ describe('Landing page', () => {
   it('should be able to navigate to map page', () => {
     const history = createMemoryHistory();
     const { getByTestId } = render(
-      <Router history={history}>
+      <Router location={history.location} navigator={history}>
         <Landing />
       </Router>,
     );

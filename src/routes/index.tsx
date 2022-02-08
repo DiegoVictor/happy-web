@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import CreateOrphanage from '../pages/CreateOrphanage';
 
 import Landing from '../pages/Landing';
@@ -8,11 +8,11 @@ import OrphanagesMap from '../pages/OrphanagesMap';
 
 export default () => {
   return (
-    <Switch>
-      <Route component={Landing} path="/" exact />
-      <Route component={OrphanagesMap} path="/app" />
-      <Route component={CreateOrphanage} path="/orphanages/create" />
-      <Route component={Orphanage} path="/orphanages/:id" />
-    </Switch>
+    <Routes>
+      <Route element={Landing} path="/" />
+      <Route element={OrphanagesMap} path="/app" />
+      <Route element={CreateOrphanage} path="/orphanages/create" />
+      <Route element={Orphanage} path="/orphanages/:id" />
+    </Routes>
   );
 };

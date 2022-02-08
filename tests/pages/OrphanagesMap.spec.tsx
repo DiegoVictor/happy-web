@@ -19,11 +19,13 @@ describe('OrphanagesMap page', () => {
   const apiMock = new MockAdapter(api);
 
   it('should be able to navigate to map page', async () => {
-    const history = createMemoryHistory();
+    const history = createMemoryHistory({
+      initialEntries: ['/'],
+    });
     apiMock.onGet('/orphanages').reply(200, []);
 
     const { getByTestId } = render(
-      <Router history={history}>
+      <Router location={history.location} navigator={history}>
         <OrphanagesMap />
       </Router>,
     );
