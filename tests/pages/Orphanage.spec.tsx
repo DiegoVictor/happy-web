@@ -5,6 +5,7 @@ import MockAdapter from 'axios-mock-adapter';
 import Orphanage from '../../src/pages/Orphanage';
 import factory from '../utils/factory';
 import api from '../../src/services/api';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface IOrphanage {
   name: string;
@@ -21,18 +22,10 @@ interface IOrphanage {
   }[];
 }
 
-jest.mock('react-router-dom', () => {
-  return {
-    useParams: () => {
-      return {
-        id: '1',
-      };
-    },
-    useHistory: () => ({
-      goBack: () => {},
-    }),
-  };
-});
+const navigate = jest.fn((_: string) => {});
+(useNavigate as jest.Mock).mockImplementation(() => navigate);
+(useParams as jest.Mock).mockReturnValue({ id: 1 });
+jest.mock('react-router-dom');
 
 describe('Orphanage', () => {
   const apiMock = new MockAdapter(api);

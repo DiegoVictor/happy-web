@@ -35,14 +35,10 @@ interface Orphanage {
   }[];
 }
 
-interface Params {
-  id: string;
-}
-
 const Orphanage: React.FC = () => {
   const [orphanage, setOrphanage] = useState<Orphanage>();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const params = useParams<Params>();
+  const params = useParams();
 
   useEffect(() => {
     (async () => {

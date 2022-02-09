@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import CreateOrphanage from '../../src/pages/CreateOrphanage';
 import factory from '../utils/factory';
 import api from '../../src/services/api';
+import { useNavigate } from 'react-router-dom';
 
 interface Orphanage {
   name: string;
@@ -16,15 +17,9 @@ interface Orphanage {
   whatsapp: string;
 }
 
-const mockedPush = jest.fn(() => {});
-jest.mock('react-router-dom', () => {
-  return {
-    useHistory: () => ({
-      goBack: () => {},
-      push: mockedPush,
-    }),
-  };
-});
+const navigate = jest.fn((_: string) => {});
+(useNavigate as jest.Mock).mockImplementation(() => navigate);
+jest.mock('react-router-dom');
 
 jest.mock('react-toastify');
 
@@ -72,7 +67,7 @@ describe('CreateOrphanage', () => {
       fireEvent.click(getByTestId('submit'));
     });
 
-    expect(mockedPush).not.toHaveBeenCalledWith('/app');
+    expect(navigate).not.toHaveBeenCalledWith('/app');
     expect(global.URL.createObjectURL).not.toHaveBeenCalledWith(new Blob());
     expect(toast.error).toHaveBeenCalledWith(
       'Ops! Alguma coisa deu errada tente novamente',
@@ -120,7 +115,7 @@ describe('CreateOrphanage', () => {
       fireEvent.click(getByTestId('submit'));
     });
 
-    expect(mockedPush).toHaveBeenCalledWith('/app');
+    expect(navigate).toHaveBeenCalledWith('/app');
     expect(global.URL.createObjectURL).toHaveBeenCalledWith(new Blob());
   });
 
@@ -135,7 +130,7 @@ describe('CreateOrphanage', () => {
       fireEvent.click(getByTestId('submit'));
     });
 
-    expect(mockedPush).toHaveBeenCalledWith('/app');
+    expect(navigate).toHaveBeenCalledWith('/app');
     expect(global.URL.createObjectURL).toHaveBeenCalledWith(new Blob());
 
     expect(getAllByText('Este campo é obrigatório').length).toBe(5);

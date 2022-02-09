@@ -2,7 +2,7 @@ import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import { FiPlus } from 'react-icons/fi';
 import { LeafletMouseEvent } from 'leaflet';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
@@ -32,7 +32,7 @@ const CreateOrphanage: React.FC = () => {
   const [mapError, setMapError] = useState('');
 
   const formRef = useRef<FormHandles>(null);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleMapClick = useCallback((event: LeafletMouseEvent) => {
     const { lat, lng } = event.latlng;
@@ -106,7 +106,7 @@ const CreateOrphanage: React.FC = () => {
 
         await api.post('/orphanages', form);
 
-        history.push('/app');
+        navigate('/app');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errBag = getValidationErrors(err);
@@ -121,7 +121,7 @@ const CreateOrphanage: React.FC = () => {
         }
       }
     },
-    [openOnWeekends, history, images, position],
+    [openOnWeekends, navigate, images, position],
   );
 
   return (
