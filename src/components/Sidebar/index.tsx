@@ -12,7 +12,7 @@ const Sidebar: React.FC = () => {
       <img src={MapMarkerImg} alt="Happy" />
 
       <footer>
-        <button type="button" onClick={() => navigate(-1)}>
+        <button type="button" data-testid="back" onClick={() => navigate(-1)}>
           <FiArrowLeft size={24} color="#FFF" />
         </button>
       </footer>
