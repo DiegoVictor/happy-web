@@ -9,10 +9,10 @@ import OrphanagesMap from '../pages/OrphanagesMap';
 export default () => {
   return (
     <Routes>
-      <Route element={Landing} path="/" />
-      <Route element={OrphanagesMap} path="/app" />
-      <Route element={CreateOrphanage} path="/orphanages/create" />
-      <Route element={Orphanage} path="/orphanages/:id" />
+      <Route element={<Landing />} path="/" />
+      <Route element={<OrphanagesMap />} path="/app" />
+      <Route element={<CreateOrphanage />} path="/orphanages/create" />
+      <Route element={<Orphanage />} path="/orphanages/:id" />
     </Routes>
   );
 };
