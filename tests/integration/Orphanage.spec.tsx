@@ -1,11 +1,11 @@
 import React from 'react';
 import { render, act, fireEvent } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Orphanage from '../../src/pages/Orphanage';
 import factory from '../utils/factory';
 import api from '../../src/services/api';
-import { useNavigate, useParams } from 'react-router-dom';
 
 interface IOrphanage {
   name: string;

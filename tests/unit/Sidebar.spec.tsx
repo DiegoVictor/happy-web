@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import Sidebar from '../../src/components/Sidebar';
 
