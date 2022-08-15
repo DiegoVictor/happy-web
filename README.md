@@ -7,7 +7,7 @@
 [![airbnb-style](https://flat.badgen.net/badge/style-guide/airbnb/ff5a5f?icon=airbnb)](https://github.com/airbnb/javascript)
 [![jest](https://img.shields.io/badge/jest-24.9.0-brightgreen?style=flat-square&logo=jest)](https://jestjs.io/)
 [![coverage](https://img.shields.io/codecov/c/gh/DiegoVictor/happy-web?logo=codecov&style=flat-square)](https://codecov.io/gh/DiegoVictor/happy-web)
-[![MIT License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](https://raw.githubusercontent.com/DiegoVictor/happy-web/master/LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](https://raw.githubusercontent.com/DiegoVictor/happy-web/main/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)<br>
 
 This web version allow users to look for orphanages near from yourself, see details about it and create new ones.
@@ -24,10 +24,10 @@ This web version allow users to look for orphanages near from yourself, see deta
 
 # Screenshots
 Click to expand.<br>
-<img src="https://raw.githubusercontent.com/DiegoVictor/happy-web/master/screenshots/landing.png" width="49%"/>
-<img src="https://raw.githubusercontent.com/DiegoVictor/happy-web/master/screenshots/map.png" width="49%"/>
-<img src="https://raw.githubusercontent.com/DiegoVictor/happy-web/master/screenshots/form.png" width="49%"/>
-<img src="https://raw.githubusercontent.com/DiegoVictor/happy-web/master/screenshots/orphanage.png" width="49%"/>
+<img src="https://raw.githubusercontent.com/DiegoVictor/happy-web/main/screenshots/landing.png" width="49%"/>
+<img src="https://raw.githubusercontent.com/DiegoVictor/happy-web/main/screenshots/map.png" width="49%"/>
+<img src="https://raw.githubusercontent.com/DiegoVictor/happy-web/main/screenshots/form.png" width="49%"/>
+<img src="https://raw.githubusercontent.com/DiegoVictor/happy-web/main/screenshots/orphanage.png" width="49%"/>
 
 # Installing
 Easy peasy lemon squeezy:
