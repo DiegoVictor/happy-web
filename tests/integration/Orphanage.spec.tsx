@@ -1,13 +1,13 @@
 import React from 'react';
-import { render, act, fireEvent } from '@testing-library/react';
+import { render, act, fireEvent, waitFor } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
-import { useNavigate, useParams } from 'react-router-dom';
-
 import Orphanage from '../../src/pages/Orphanage';
 import factory from '../utils/factory';
 import api from '../../src/services/api';
+import { useNavigate } from 'react-router-dom';
 
 interface IOrphanage {
+  id?: string;
   name: string;
   about: string;
   latitude: number;
@@ -22,10 +22,14 @@ interface IOrphanage {
   }[];
 }
 
-const navigate = jest.fn((_: string) => {});
-(useNavigate as jest.Mock).mockImplementation(() => navigate);
-(useParams as jest.Mock).mockReturnValue({ id: 1 });
-jest.mock('react-router-dom');
+const mockUseParams = jest.fn();
+const mockUseNavigate = jest.fn();
+jest.mock('react-router-dom', () => {
+  return {
+    useParams: () => mockUseParams(),
+    useNavigate: () => mockUseNavigate(),
+  };
+});
 
 describe('Orphanage', () => {
   const apiMock = new MockAdapter(api);
@@ -35,18 +39,13 @@ describe('Orphanage', () => {
       open_on_weekends: true,
     });
 
-    apiMock.onGet(`/orphanages/${1}`).reply(200, orphanage);
+    apiMock.onGet(`/orphanages/${orphanage.id}`).reply(200, orphanage);
 
-    let getByText;
-    let getByTestId;
-    let container;
-    await act(async () => {
-      const component = render(<Orphanage />);
+    mockUseParams.mockReturnValue({ id: orphanage.id });
 
-      getByText = component.getByText;
-      getByTestId = component.getByTestId;
-      container = component.container;
-    });
+    const { getByText, getByTestId, container } = render(<Orphanage />);
+
+    await waitFor(() => getByText(orphanage.name));
 
     expect(getByText(orphanage.name)).toBeInTheDocument();
     expect(getByText(orphanage.about)).toBeInTheDocument();
@@ -70,13 +69,15 @@ describe('Orphanage', () => {
 
     expect(container.querySelector('.leaflet-marker-icon')).toBeInTheDocument();
 
-    let image = orphanage.images.shift();
-    expect(getByTestId('principal_image')).toHaveAttribute('src', image.path);
+    const image = orphanage.images.shift();
+    expect(getByTestId('principal_image')).toHaveAttribute('src', image?.path);
 
-    image = orphanage.images.pop();
-    fireEvent.click(getByTestId(`images_button_${image.id}`));
-
-    expect(getByTestId('principal_image')).toHaveAttribute('src', image.path);
+    const thumbnail = orphanage.images.pop();
+    fireEvent.click(getByTestId(`images_button_${thumbnail?.id}`));
+    expect(getByTestId('principal_image')).toHaveAttribute(
+      'src',
+      thumbnail?.path,
+    );
   });
 
   it('should be able to see orphanage that not open on weekends data', async () => {
@@ -84,18 +85,13 @@ describe('Orphanage', () => {
       open_on_weekends: false,
     });
 
-    apiMock.onGet(`/orphanages/${1}`).reply(200, orphanage);
+    apiMock.onGet(`/orphanages/${orphanage.id}`).reply(200, orphanage);
 
-    let getByText;
-    let getByTestId;
-    let container;
-    await act(async () => {
-      const component = render(<Orphanage />);
+    mockUseParams.mockReturnValue({ id: orphanage.id });
 
-      getByText = component.getByText;
-      getByTestId = component.getByTestId;
-      container = component.container;
-    });
+    const { getByText, getByTestId, container } = render(<Orphanage />);
+
+    await waitFor(() => getByText(orphanage.name));
 
     expect(getByText('Não atendemos fim de semana')).toBeInTheDocument();
 
@@ -108,12 +104,14 @@ describe('Orphanage', () => {
 
     expect(container.querySelector('.leaflet-marker-icon')).toBeInTheDocument();
 
-    let image = orphanage.images.shift();
-    expect(getByTestId('principal_image')).toHaveAttribute('src', image.path);
+    const image = orphanage.images.shift();
+    expect(getByTestId('principal_image')).toHaveAttribute('src', image?.path);
 
-    image = orphanage.images.pop();
-    fireEvent.click(getByTestId(`images_button_${image.id}`));
-
-    expect(getByTestId('principal_image')).toHaveAttribute('src', image.path);
+    const thumbnail = orphanage.images.pop();
+    fireEvent.click(getByTestId(`images_button_${thumbnail?.id}`));
+    expect(getByTestId('principal_image')).toHaveAttribute(
+      'src',
+      thumbnail?.path,
+    );
   });
 });
