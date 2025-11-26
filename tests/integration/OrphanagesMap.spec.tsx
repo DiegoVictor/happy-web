@@ -1,9 +1,7 @@
 import React from 'react';
-import { fireEvent, render, act } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
-import { MemoryRouter, Router } from 'react-router-dom';
+import { fireEvent, render, act, waitFor } from '@testing-library/react';
+import { MemoryRouter, Route, Router, Routes } from 'react-router-dom';
 import MockAdapter from 'axios-mock-adapter';
-
 import OrphanagesMap from '../../src/pages/OrphanagesMap';
 import factory from '../utils/factory';
 import api from '../../src/services/api';
@@ -19,15 +17,22 @@ describe('OrphanagesMap page', () => {
   const apiMock = new MockAdapter(api);
 
   it('should be able to navigate to map page', async () => {
-    const history = createMemoryHistory({
-      initialEntries: ['/'],
-    });
     apiMock.onGet('/orphanages').reply(200, []);
 
-    const { getByTestId } = render(
-      <Router location={history.location} navigator={history}>
-        <OrphanagesMap />
-      </Router>,
+    const pageTitle = 'Orphanage Create Page';
+    const { getByTestId, getByText } = render(
+      <MemoryRouter
+        initialEntries={['/']}
+        future={{
+          v7_relativeSplatPath: true,
+          v7_startTransition: true,
+        }}
+      >
+        <Routes>
+          <Route path="/" element={<OrphanagesMap />} />
+          <Route path="/orphanages/create" element={<div>{pageTitle}</div>} />
+        </Routes>
+      </MemoryRouter>,
     );
 
     const button = getByTestId('register');
@@ -37,33 +42,33 @@ describe('OrphanagesMap page', () => {
       fireEvent.click(button);
     });
 
-    expect(history.location.pathname).toBe('/orphanages/create');
+    expect(getByText(pageTitle)).toBeInTheDocument();
   });
 
-  it('should be able to navigate see a map', async () => {
+  it('should be able to navigate to see a map', async () => {
     const orphanages = await factory.attrsMany<Orphanage>('Orphanage', 3);
 
     apiMock.onGet('/orphanages').reply(200, orphanages);
 
-    let container;
-    let getByText;
-    let getByTestId;
-    await act(async () => {
-      const component = render(
-        <MemoryRouter>
-          <OrphanagesMap />
-        </MemoryRouter>,
-      );
-      container = component.container;
-      getByText = component.getByText;
-      getByTestId = component.getByTestId;
-    });
+    const { container, getByText, getByTestId } = render(
+      <MemoryRouter
+        future={{
+          v7_relativeSplatPath: true,
+          v7_startTransition: true,
+        }}
+      >
+        <OrphanagesMap />
+      </MemoryRouter>,
+    );
+
+    await waitFor(
+      () => container.querySelectorAll('.leaflet-marker-icon').length > 0,
+    );
 
     const map = container.querySelector('.leaflet-container');
-    expect(map).toBeTruthy();
+    expect(map).toBeInTheDocument();
 
     const markers = container.querySelectorAll('.leaflet-marker-icon');
-
     expect(markers.length).toBe(orphanages.length);
 
     markers.forEach((marker, index) => {
