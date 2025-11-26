@@ -17,12 +17,14 @@ interface Orphanage {
 
 const OrphanagesMap: React.FC = () => {
   const [orphanages, setOrphanages] = useState<Orphanage[]>([]);
+
   useEffect(() => {
     (async () => {
       const { data } = await api.get<Orphanage[]>('/orphanages');
-
       setOrphanages(data);
     })();
+
+    return () => {};
   }, []);
 
   return (
